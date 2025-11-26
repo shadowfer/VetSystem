@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Service extends Model
+{
+    protected $fillable = ['name', 'description', 'image', 'price', 'associated_doctors'];
+
+    protected $casts = [
+        'associated_doctors' => 'array',
+    ];
+}
