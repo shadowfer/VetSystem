@@ -25,9 +25,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between items-center h-20">
                         <div class="flex items-center gap-2">
-                            <div class="flex items-center justify-center w-10 h-10 bg-emerald-700 rounded-lg">
-                                <i class="ph-bold ph-heart text-white text-xl"></i>
-                            </div>
+                            <img src="{{ asset('img/logo.png') }}" alt="VetSystem Logo" class="w-10 h-10 rounded-full object-cover">
                             <span class="text-xl font-extrabold text-emerald-800">VetSystem</span>
                         </div>
                         <div class="flex items-center gap-8">
@@ -50,7 +48,11 @@
             </nav>
 
             <!-- Hero Section -->
-            <div class="relative bg-gradient-to-b from-emerald-50 to-white py-20 overflow-hidden">
+            <div class="relative bg-white py-20 overflow-hidden">
+                <!-- Fluid Background Shapes -->
+                <div class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-[600px] h-[600px] bg-emerald-400/30 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="absolute top-0 right-0 translate-x-1/4 -translate-y-1/4 w-[500px] h-[500px] bg-teal-400/30 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="absolute bottom-0 left-1/3 translate-y-1/4 w-[400px] h-[400px] bg-emerald-300/40 rounded-full blur-[80px] pointer-events-none"></div>
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <!-- Left Content -->
@@ -92,8 +94,12 @@
             </div>
 
             <!-- Services Section -->
-            <div id="servicios" class="py-24 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="servicios" class="relative py-24 bg-white overflow-hidden">
+                <!-- Fluid Background Shapes -->
+                <div class="absolute top-1/4 right-0 translate-x-1/3 w-[600px] h-[600px] bg-emerald-300/50 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 -translate-x-1/3 translate-y-1/4 w-[500px] h-[500px] bg-teal-300/50 rounded-full blur-[100px] pointer-events-none"></div>
+                
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-3xl mx-auto mb-16">
                         <span class="text-emerald-700 font-bold uppercase text-sm tracking-wider">Nuestros Servicios</span>
                         <h2 class="mt-3 text-4xl lg:text-5xl font-extrabold text-gray-900">Cuidado Integral Profesional</h2>
@@ -257,19 +263,19 @@
             </div>
 
             <!-- Testimonials Section -->
-            <div class="py-24 bg-gradient-to-br from-emerald-50 to-white">
+            <div class="py-24 bg-emerald-900 text-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-3xl mx-auto mb-16">
-                        <span class="text-emerald-700 font-bold uppercase text-sm tracking-wider">Testimonios</span>
-                        <h2 class="mt-3 text-4xl lg:text-5xl font-extrabold text-gray-900">Lo que Dicen Nuestros Clientes</h2>
-                        <p class="mt-4 text-xl text-gray-600">La confianza de nuestros clientes es nuestro mayor logro.</p>
+                        <span class="text-emerald-300 font-bold uppercase text-sm tracking-wider">Testimonios</span>
+                        <h2 class="mt-3 text-4xl lg:text-5xl font-extrabold text-white">Lo que Dicen Nuestros Clientes</h2>
+                        <p class="mt-4 text-xl text-emerald-100">La confianza de nuestros clientes es nuestro mayor logro.</p>
                     </div>
 
                     <div x-data="{ activeSlide: 0, slides: 4 }" class="relative">
                         <div class="overflow-hidden">
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 <!-- Testimonial 1 -->
-                                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow">
+                                <div class="bg-emerald-800/50 border border-emerald-700/50 rounded-xl p-8 shadow-sm hover:bg-emerald-800 transition-colors">
                                     <div class="flex items-center gap-1 mb-4">
                                         <i class="ph-fill ph-star text-amber-400 text-xl"></i>
                                         <i class="ph-fill ph-star text-amber-400 text-xl"></i>
@@ -278,9 +284,9 @@
                                         <i class="ph-fill ph-star text-amber-400 text-xl"></i>
                                     </div>
                                     <div class="mb-6">
-                                        <i class="ph-fill ph-quotes text-5xl text-emerald-100"></i>
+                                        <i class="ph-fill ph-quotes text-5xl text-emerald-600"></i>
                                     </div>
-                                    <p class="text-gray-700 leading-relaxed mb-6">
+                                    <p class="text-emerald-50 leading-relaxed mb-6">
                                         "Excelente atención veterinaria. El Dr. Pérez cuidó de Max durante su cirugía y el seguimiento fue impecable. ¡Totalmente recomendado!"
                                     </p>
                                     <div class="flex items-center gap-4">
@@ -288,14 +294,14 @@
                                             <span class="text-xl font-bold text-white">JP</span>
                                         </div>
                                         <div>
-                                            <p class="font-bold text-gray-900">Juan Pérez</p>
-                                            <p class="text-sm text-gray-600">Dueño de Max</p>
+                                            <p class="font-bold text-white">Juan Pérez</p>
+                                            <p class="text-sm text-emerald-200">Dueño de Max</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Testimonial 2 -->
-                                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow">
+                                <div class="bg-emerald-800/50 border border-emerald-700/50 rounded-xl p-8 shadow-sm hover:bg-emerald-800 transition-colors">
                                     <div class="flex items-center gap-1 mb-4">
                                         <i class="ph-fill ph-star text-amber-400 text-xl"></i>
                                         <i class="ph-fill ph-star text-amber-400 text-xl"></i>
@@ -304,9 +310,9 @@
                                         <i class="ph-fill ph-star text-amber-400 text-xl"></i>
                                     </div>
                                     <div class="mb-6">
-                                        <i class="ph-fill ph-quotes text-5xl text-emerald-100"></i>
+                                        <i class="ph-fill ph-quotes text-5xl text-emerald-600"></i>
                                     </div>
-                                    <p class="text-gray-700 leading-relaxed mb-6">
+                                    <p class="text-emerald-50 leading-relaxed mb-6">
                                         "Luna recibió su vacunación anual y el trato fue excepcional. Las instalaciones son muy limpias y modernas. Volveremos sin duda."
                                     </p>
                                     <div class="flex items-center gap-4">
@@ -314,14 +320,14 @@
                                             <span class="text-xl font-bold text-white">MG</span>
                                         </div>
                                         <div>
-                                            <p class="font-bold text-gray-900">María García</p>
-                                            <p class="text-sm text-gray-600">Dueña de Luna</p>
+                                            <p class="font-bold text-white">María García</p>
+                                            <p class="text-sm text-emerald-200">Dueña de Luna</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Testimonial 3 -->
-                                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow">
+                                <div class="bg-emerald-800/50 border border-emerald-700/50 rounded-xl p-8 shadow-sm hover:bg-emerald-800 transition-colors">
                                     <div class="flex items-center gap-1 mb-4">
                                         <i class="ph-fill ph-star text-amber-400 text-xl"></i>
                                         <i class="ph-fill ph-star text-amber-400 text-xl"></i>
@@ -330,9 +336,9 @@
                                         <i class="ph-fill ph-star text-amber-400 text-xl"></i>
                                     </div>
                                     <div class="mb-6">
-                                        <i class="ph-fill ph-quotes text-5xl text-emerald-100"></i>
+                                        <i class="ph-fill ph-quotes text-5xl text-emerald-600"></i>
                                     </div>
-                                    <p class="text-gray-700 leading-relaxed mb-6">
+                                    <p class="text-emerald-50 leading-relaxed mb-6">
                                         "El servicio de urgencias 24/7 nos salvó cuando Rocky tuvo una emergencia. Personal profesional y muy empático. ¡Gracias por todo!"
                                     </p>
                                     <div class="flex items-center gap-4">
@@ -340,8 +346,8 @@
                                             <span class="text-xl font-bold text-white">CL</span>
                                         </div>
                                         <div>
-                                            <p class="font-bold text-gray-900">Carlos López</p>
-                                            <p class="text-sm text-gray-600">Dueño de Rocky</p>
+                                            <p class="font-bold text-white">Carlos López</p>
+                                            <p class="text-sm text-emerald-200">Dueño de Rocky</p>
                                         </div>
                                     </div>
                                 </div>
@@ -352,7 +358,7 @@
             </div>
 
             <!-- Team Gallery Section -->
-            <div class="py-24 bg-gray-50">
+            <div class="py-24 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center max-w-3xl mx-auto mb-16">
                         <span class="text-emerald-700 font-bold uppercase text-sm tracking-wider">Nuestro Equipo</span>
@@ -426,9 +432,7 @@
                     <div class="flex flex-col md:flex-row justify-between items-center">
                         <div class="mb-4 md:mb-0">
                             <div class="flex items-center gap-2 mb-2">
-                                <div class="flex items-center justify-center w-10 h-10 bg-emerald-700 rounded-lg">
-                                    <i class="ph-bold ph-heart text-white text-xl"></i>
-                                </div>
+                                <img src="{{ asset('img/logo.png') }}" alt="VetSystem Logo" class="w-10 h-10 rounded-full object-cover">
                                 <span class="text-xl font-bold">VetSystem</span>
                             </div>
                             <p class="text-emerald-200 text-sm">Cuidado profesional para tus mascotas</p>

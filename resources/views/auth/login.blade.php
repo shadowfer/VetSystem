@@ -1,47 +1,87 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<x-guest-layout containerClass="w-full max-w-5xl bg-white shadow-2xl overflow-hidden rounded-2xl flex flex-col md:flex-row p-0 my-8 mx-4">
+    <!-- Left Side: Image -->
+    <div class="hidden md:block md:w-1/2 relative min-h-[600px]">
+        <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=800&h=1000&fit=crop" 
+             alt="Veterinario" 
+             class="w-full h-full object-cover absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-12">
+            <h2 class="text-4xl font-bold text-white mb-4 leading-tight">Cuidado Veterinario</h2>
+            <p class="text-2xl text-emerald-200 font-medium">de Excelencia.</p>
+        </div>
+    </div>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    <!-- Right Side: Form -->
+    <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white">
+        <div class="flex flex-col items-center mb-8">
+            <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mb-4">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo" class="w-10 h-10 rounded-full object-cover">
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900">Iniciar Sesión</h1>
+            <p class="text-gray-500 mt-2">Bienvenido a VetSystem</p>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+        <form method="POST" action="{{ route('login') }}" class="space-y-5">
+            @csrf
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <!-- Email Address -->
+            <div>
+                <x-text-input id="email" 
+                             class="block w-full rounded-full border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 px-5 py-3" 
+                             type="email" 
+                             name="email" 
+                             :value="old('email')" 
+                             required autofocus 
+                             autocomplete="username" 
+                             placeholder="Correo Electrónico" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2 ml-4" />
+            </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+            <!-- Password -->
+            <div>
+                <x-text-input id="password" 
+                             class="block w-full rounded-full border-gray-300 focus:border-emerald-500 focus:ring-emerald-500 px-5 py-3" 
+                             type="password" 
+                             name="password" 
+                             required 
+                             autocomplete="current-password" 
+                             placeholder="Contraseña" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2 ml-4" />
+            </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+            <!-- Remember Me -->
+            <div class="flex items-center justify-between pl-1">
+                <label for="remember_me" class="inline-flex items-center">
+                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-emerald-600 shadow-sm focus:ring-emerald-500" name="remember">
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Recordarme') }}</span>
+                </label>
+                
+                @if (Route::has('password.request'))
+                    <a class="text-sm text-gray-500 hover:text-emerald-600 transition-colors" href="{{ route('password.request') }}">
+                        {{ __('¿Olvidaste tu contraseña?') }}
+                    </a>
+                @endif
+            </div>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+            <div class="pt-2">
+                <button type="submit" class="w-full bg-amber-400 hover:bg-amber-500 text-white font-bold py-3 px-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5">
+                    {{ __('Iniciar Sesión') }}
+                </button>
+            </div>
+
+            <div class="text-center mt-6">
+                <p class="text-sm text-gray-500">
+                    ¿No tienes cuenta? 
+                    <a href="{{ route('register') }}" class="font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
+                        Registrarse
+                    </a>
+                </p>
+            </div>
+            
+            <div class="text-center mt-8">
+                <p class="text-xs text-gray-400">© {{ date('Y') }} VetSystem</p>
+            </div>
+        </form>
+    </div>
 </x-guest-layout>

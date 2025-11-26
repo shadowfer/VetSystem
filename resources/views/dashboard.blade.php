@@ -64,7 +64,16 @@
                 <!-- Pet Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-all duration-300">
                     <div class="h-48 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600&h=400&fit=crop" alt="{{ $pet->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @php
+                            $petImage = match(strtolower(trim($pet->species))) {
+                                'gato', 'cat' => 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=400&fit=crop',
+                                'perro', 'dog' => 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600&h=400&fit=crop',
+                                'ave', 'pájaro', 'pajaro', 'bird' => 'https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?w=600&h=400&fit=crop',
+                                'conejo', 'rabbit' => 'https://images.unsplash.com/photo-1589254064278-e026347fb51e?w=600&h=400&fit=crop',
+                                default => 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&h=400&fit=crop'
+                            };
+                        @endphp
+                        <img src="{{ $petImage }}" alt="{{ $pet->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-emerald-700 shadow-sm">
                             Saludable
                         </div>
@@ -414,82 +423,86 @@
     <!-- Stats Grid -->
     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4 mt-8">
         <!-- Card 1 - Admin/Staff Only -->
-        <div class="relative bg-gradient-to-br from-blue-50 to-white border border-blue-200 rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <div class="absolute top-0 right-0 w-32 h-32 opacity-5">
-                <i class="ph-fill ph-users text-9xl text-blue-600"></i>
+        <div class="relative bg-white border border-blue-200 rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=500&h=300&fit=crop" alt="Background" class="w-full h-full object-cover opacity-70 group-hover:opacity-80 transition-opacity duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-blue-100/30"></div>
             </div>
-            <div class="relative p-6">
+            <div class="relative p-6 z-10">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg">
                         <i class="ph-bold ph-users text-2xl"></i>
                     </div>
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-white/60 backdrop-blur-sm text-blue-700 text-xs font-bold rounded-full shadow-sm">
                         <i class="ph-bold ph-trend-up text-sm"></i>
                         +12%
                     </span>
                 </div>
                 <p class="text-3xl font-extrabold text-gray-900">{{ \App\Models\User::where('is_active', true)->count() }}</p>
-                <p class="mt-1 text-sm text-gray-600 font-medium">Usuarios Activos</p>
+                <p class="mt-1 text-sm text-gray-700 font-medium">Usuarios Activos</p>
             </div>
         </div>
 
         <!-- Card 2 - Pets -->
-        <div class="relative bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <div class="absolute top-0 right-0 w-32 h-32 opacity-5">
-                <i class="ph-fill ph-paw-print text-9xl text-emerald-600"></i>
+        <div class="relative bg-white border border-emerald-200 rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=500&h=300&fit=crop" alt="Background" class="w-full h-full object-cover opacity-70 group-hover:opacity-80 transition-opacity duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-emerald-100/30"></div>
             </div>
-            <div class="relative p-6">
+            <div class="relative p-6 z-10">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-xl flex items-center justify-center shadow-lg">
                         <i class="ph-bold ph-paw-print text-2xl"></i>
                     </div>
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-white/60 backdrop-blur-sm text-emerald-700 text-xs font-bold rounded-full shadow-sm">
                         <i class="ph-bold ph-trend-up text-sm"></i>
                         +8%
                     </span>
                 </div>
                 <p class="text-3xl font-extrabold text-gray-900">{{ \App\Models\Pet::count() }}</p>
-                <p class="mt-1 text-sm text-gray-600 font-medium">Mascotas Registradas</p>
+                <p class="mt-1 text-sm text-gray-700 font-medium">Mascotas Registradas</p>
             </div>
         </div>
 
         <!-- Card 3 - Appointments -->
-        <div class="relative bg-gradient-to-br from-amber-50 to-white border border-amber-200 rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <div class="absolute top-0 right-0 w-32 h-32 opacity-5">
-                <i class="ph-fill ph-calendar text-9xl text-amber-600"></i>
+        <div class="relative bg-white border border-amber-200 rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=500&h=300&fit=crop" alt="Background" class="w-full h-full object-cover opacity-70 group-hover:opacity-80 transition-opacity duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-amber-100/30"></div>
             </div>
-            <div class="relative p-6">
+            <div class="relative p-6 z-10">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-500 text-white rounded-xl flex items-center justify-center shadow-lg">
                         <i class="ph-bold ph-calendar text-2xl"></i>
                     </div>
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-white/60 backdrop-blur-sm text-blue-700 text-xs font-bold rounded-full shadow-sm">
                         <i class="ph-bold ph-clock text-sm"></i>
                         Hoy
                     </span>
                 </div>
                 <p class="text-3xl font-extrabold text-gray-900">5</p>
-                <p class="mt-1 text-sm text-gray-600 font-medium">Citas Programadas</p>
+                <p class="mt-1 text-sm text-gray-700 font-medium">Citas Programadas</p>
             </div>
         </div>
 
         <!-- Card 4 - Emergencies -->
-        <div class="relative bg-gradient-to-br from-red-50 to-white border border-red-200 rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <div class="absolute top-0 right-0 w-32 h-32 opacity-5">
-                <i class="ph-fill ph-warning text-9xl text-red-600"></i>
+        <div class="relative bg-white border border-red-200 rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=500&h=300&fit=crop" alt="Background" class="w-full h-full object-cover opacity-70 group-hover:opacity-80 transition-opacity duration-300">
+                <div class="absolute inset-0 bg-gradient-to-br from-red-50/50 to-red-100/30"></div>
             </div>
-            <div class="relative p-6">
+            <div class="relative p-6 z-10">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-14 h-14 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-xl flex items-center justify-center shadow-lg">
                         <i class="ph-bold ph-warning text-2xl"></i>
                     </div>
-                    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-full">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-white/60 backdrop-blur-sm text-red-700 text-xs font-bold rounded-full shadow-sm">
                         <i class="ph-bold ph-warning-circle text-sm"></i>
                         Urgente
                     </span>
                 </div>
                 <p class="text-3xl font-extrabold text-gray-900">2</p>
-                <p class="mt-1 text-sm text-gray-600 font-medium">Urgencias</p>
+                <p class="mt-1 text-sm text-gray-700 font-medium">Urgencias</p>
             </div>
         </div>
     </div>
@@ -506,30 +519,48 @@
                 <div class="p-8">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         <!-- Action 1 -->
-                        <a href="{{ route('pets.create') }}" class="group bg-gradient-to-br from-emerald-50 to-white border-2 border-emerald-200 rounded-xl p-6 hover:border-emerald-400 hover:shadow-lg transition-all duration-300">
-                            <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
-                                <i class="ph-bold ph-plus text-2xl"></i>
+                        <a href="{{ route('pets.create') }}" class="relative group overflow-hidden bg-white border-2 border-emerald-200 rounded-xl p-6 hover:border-emerald-400 hover:shadow-lg transition-all duration-300">
+                            <div class="absolute inset-0">
+                                <img src="https://images.unsplash.com/photo-1599443015574-be5fe8a05783?w=500&h=300&fit=crop" alt="Background" class="w-full h-full object-cover opacity-70 group-hover:opacity-80 transition-opacity duration-300">
+                                <div class="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-emerald-100/30"></div>
                             </div>
-                            <h4 class="font-bold text-gray-900 text-lg">Registrar Mascota</h4>
-                            <p class="mt-1 text-sm text-gray-600">Añadir nuevo paciente</p>
+                            <div class="relative z-10">
+                                <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
+                                    <i class="ph-bold ph-plus text-2xl"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-900 text-lg">Registrar Mascota</h4>
+                                <p class="mt-1 text-sm text-gray-700 font-medium">Añadir nuevo paciente</p>
+                            </div>
                         </a>
 
                         <!-- Action 2 -->
-                        <button class="group bg-gradient-to-br from-amber-50 to-white border-2 border-amber-200 rounded-xl p-6 hover:border-amber-400 hover:shadow-lg transition-all duration-300">
-                            <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-500 text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
-                                <i class="ph-bold ph-calendar-plus text-2xl"></i>
+                        <button class="relative group overflow-hidden bg-white border-2 border-amber-200 rounded-xl p-6 hover:border-amber-400 hover:shadow-lg transition-all duration-300">
+                            <div class="absolute inset-0">
+                                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=500&h=300&fit=crop" alt="Background" class="w-full h-full object-cover opacity-70 group-hover:opacity-80 transition-opacity duration-300">
+                                <div class="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-amber-100/30"></div>
                             </div>
-                            <h4 class="font-bold text-gray-900 text-lg">Agendar Cita</h4>
-                            <p class="mt-1 text-sm text-gray-600">Nueva consulta</p>
+                            <div class="relative z-10">
+                                <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-500 text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
+                                    <i class="ph-bold ph-calendar-plus text-2xl"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-900 text-lg">Agendar Cita</h4>
+                                <p class="mt-1 text-sm text-gray-700 font-medium">Nueva consulta</p>
+                            </div>
                         </button>
 
                         <!-- Action 3 -->
-                        <button class="group bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 rounded-xl p-6 hover:border-blue-400 hover:shadow-lg transition-all duration-300">
-                            <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
-                                <i class="ph-bold ph-syringe text-2xl"></i>
+                        <button class="relative group overflow-hidden bg-white border-2 border-blue-200 rounded-xl p-6 hover:border-blue-400 hover:shadow-lg transition-all duration-300">
+                            <div class="absolute inset-0">
+                                <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=500&h=300&fit=crop" alt="Background" class="w-full h-full object-cover opacity-70 group-hover:opacity-80 transition-opacity duration-300">
+                                <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-blue-100/30"></div>
                             </div>
-                            <h4 class="font-bold text-gray-900 text-lg">Registrar Vacuna</h4>
-                            <p class="mt-1 text-sm text-gray-600">Actualizar historial</p>
+                            <div class="relative z-10">
+                                <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md">
+                                    <i class="ph-bold ph-syringe text-2xl"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-900 text-lg">Registrar Vacuna</h4>
+                                <p class="mt-1 text-sm text-gray-700 font-medium">Actualizar historial</p>
+                            </div>
                         </button>
                     </div>
                 </div>

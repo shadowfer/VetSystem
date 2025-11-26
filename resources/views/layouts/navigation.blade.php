@@ -2,9 +2,7 @@
     <!-- Logo -->
     <div class="flex items-center flex-shrink-0 px-6 py-5 border-b border-gray-200 justify-between">
         <div class="flex items-center gap-3">
-            <div class="flex items-center justify-center w-12 h-12 bg-emerald-700 rounded-lg shadow-md">
-                <i class="ph-bold ph-heart text-white text-2xl"></i>
-            </div>
+            <img src="{{ asset('img/logo.png') }}" alt="VetSystem Logo" class="w-12 h-12 rounded-full object-cover">
             <span class="text-xl font-extrabold text-emerald-800">VetSystem</span>
         </div>
         

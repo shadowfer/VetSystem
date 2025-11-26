@@ -58,8 +58,21 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 w-10 h-10">
-                                        @if($pet->image)
-                                            <img class="w-10 h-10 rounded-full object-cover" src="{{ $pet->image }}" alt="{{ $pet->name }}">
+                                        @php
+                                            $petImage = $pet->image;
+                                            if (!$petImage) {
+                                                $petImage = match(strtolower(trim($pet->species))) {
+                                                    'gato', 'cat' => 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&h=400&fit=crop',
+                                                    'perro', 'dog' => 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600&h=400&fit=crop',
+                                                    'ave', 'pájaro', 'pajaro', 'bird' => 'https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?w=600&h=400&fit=crop',
+                                                    'conejo', 'rabbit' => 'https://images.unsplash.com/photo-1589254064278-e026347fb51e?w=600&h=400&fit=crop',
+                                                    default => null
+                                                };
+                                            }
+                                        @endphp
+
+                                        @if($petImage)
+                                            <img class="w-10 h-10 rounded-full object-cover" src="{{ $petImage }}" alt="{{ $pet->name }}">
                                         @else
                                             <div class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full">
                                                 <svg class="w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
