@@ -1,96 +1,176 @@
-# VetSystem - Sistema de Gestión Veterinaria
+# 🐾 VetSystem - Sistema de Gestión Veterinaria Integral
 
-## Descripción
+![Laravel](https://img.shields.io/badge/Laravel-10.x-FF2D20?style=for-the-badge&logo=laravel)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql)
 
-VetSystem es una aplicación web desarrollada en Laravel para la gestión integral de una clínica veterinaria. El sistema permite la administración de usuarios (clientes y personal), gestión de mascotas, servicios y citas médicas, con un control de acceso basado en roles (Admin, Staff, Cliente).
+## 📖 Descripción del Proyecto
 
-## Funcionalidades Principales
+**VetSystem** es una plataforma web robusta y escalable diseñada para optimizar la administración y operación de clínicas veterinarias. Desarrollada con el framework **Laravel**, esta aplicación facilita la interacción entre la administración, el personal médico y los clientes, centralizando la información de pacientes (mascotas), citas y servicios.
 
--   **Autenticación y Seguridad:** Login, Registro y protección de rutas mediante Roles.
--   **Gestión de Usuarios:**
-    -   Administradores pueden gestionar Clientes y Personal (Staff).
-    -   Funcionalidad de eliminación de usuarios.
--   **Módulo de Mascotas (Dominio):**
-    -   Registro de mascotas por parte de clientes (estado pendiente).
-    -   Aprobación/Rechazo de mascotas por parte de administradores.
-    -   CRUD completo de mascotas con imágenes.
--   **Gestión de Servicios:** Catálogo de servicios veterinarios.
--   **Dashboard Interactivo:** Vistas personalizadas según el rol del usuario.
+El sistema implementa una arquitectura segura basada en roles, asegurando que cada usuario tenga acceso únicamente a las funcionalidades pertinentes a su perfil.
 
-## Requisitos Previos
+---
 
--   PHP 8.1 o superior
--   Composer
--   Node.js y NPM
--   MySQL
+## 🚀 Características Principales
 
-## Instalación y Configuración
+### 🔐 Autenticación y Seguridad
 
-1. **Clonar el repositorio**
+-   **Sistema de Login/Registro:** Implementado con Laravel Breeze.
+-   **Control de Acceso Basado en Roles (RBAC):** Middleware personalizado para restringir rutas y vistas.
+-   **Protección CSRF:** Seguridad en todos los formularios.
 
-    ```bash
-    git clone <URL_DEL_REPOSITORIO>
-    cd VetSystem
-    ```
+### 👥 Gestión de Usuarios (Admin)
 
-2. **Instalar dependencias de PHP**
+-   **Administración de Clientes:** Registro, edición y eliminación permanente de usuarios clientes.
+-   **Gestión de Personal (Staff):** Control total sobre el equipo de trabajo (Veterinarios, Asistentes).
+-   **Filtrado Inteligente:** Vistas separadas para Clientes y Staff para una mejor organización.
 
-    ```bash
-    composer install
-    ```
+### 🐶 Módulo de Pacientes (Mascotas)
 
-3. **Instalar dependencias de Frontend**
+-   **Registro de Mascotas:** Los clientes pueden registrar sus propias mascotas.
+-   **Flujo de Aprobación:** Las mascotas registradas por clientes entran en estado "Pendiente" hasta ser aprobadas por un Administrador.
+-   **Expediente Digital:** Información detallada (Nombre, Especie, Edad, Imagen).
+-   **Imágenes Automáticas:** Asignación inteligente de imágenes por defecto según la especie si no se sube una foto.
 
-    ```bash
-    npm install
-    ```
+### 🏥 Servicios y Citas
 
-4. **Configurar entorno**
+-   **Catálogo de Servicios:** Visualización de tratamientos y servicios ofrecidos.
+-   **Gestión de Citas (Próximamente):** Módulo para agendar y controlar visitas médicas.
 
-    - Copiar el archivo de entorno de ejemplo:
-        ```bash
-        cp .env.example .env
-        ```
-    - Configurar las credenciales de base de datos en el archivo `.env`.
+---
 
-5. **Generar clave de aplicación**
+## 🏗️ Arquitectura del Sistema
 
-    ```bash
-    php artisan key:generate
-    ```
+El proyecto sigue el patrón de diseño **MVC (Modelo-Vista-Controlador)** propio de Laravel.
 
-6. **Ejecutar migraciones y seeders**
-   Este comando creará las tablas e insertará los usuarios de prueba.
+### Roles y Permisos
 
-    ```bash
-    php artisan migrate --seed
-    ```
+| Rol        | Nivel de Acceso | Funcionalidades Clave                                                         |
+| :--------- | :-------------- | :---------------------------------------------------------------------------- |
+| **Admin**  | Total           | Gestión de usuarios, roles, aprobación de mascotas, configuración global.     |
+| **Staff**  | Medio           | Gestión de servicios, visualización de citas, atención a pacientes.           |
+| **Client** | Limitado        | Gestión de sus propias mascotas, visualización de servicios, perfil personal. |
 
-7. **Ejecutar el servidor de desarrollo**
-   En una terminal:
-    ```bash
-    php artisan serve
-    ```
-    En otra terminal (para compilar assets):
-    ```bash
-    npm run dev
-    ```
+### Base de Datos (Tablas Principales)
 
-## Usuarios de Prueba (Seeders)
+-   `users`: Almacena credenciales y el campo `role` (admin, staff, client).
+-   `pets`: Información de las mascotas. Relación `BelongsTo` con `users`.
+-   `services`: Catálogo de servicios veterinarios.
 
-| Rol         | Email             | Contraseña |
-| ----------- | ----------------- | ---------- |
-| **Admin**   | `admin@test.com`  | `password` |
-| **Staff**   | `staff@test.com`  | `password` |
-| **Cliente** | `client@test.com` | `password` |
+---
 
-## Estructura del Proyecto
+## 🛠️ Requisitos Técnicos
 
--   **Controladores:** `app/Http/Controllers` (UserController, StaffController, PetController, ServiceController)
--   **Modelos:** `app/Models` (User, Pet, Service)
--   **Vistas:** `resources/views` (Organizadas por módulo: admin, pets, services, layouts)
--   **Rutas:** `routes/web.php` (Grupos de rutas protegidos por middleware de roles)
+Para ejecutar este proyecto localmente, necesitas:
 
-## Autor
+-   **PHP:** >= 8.1
+-   **Composer:** Gestor de dependencias de PHP.
+-   **Node.js & NPM:** Para compilar los assets (TailwindCSS).
+-   **MySQL:** Base de datos relacional.
 
-[Tu Nombre]
+---
+
+## 💻 Guía de Instalación Paso a Paso
+
+### 1. Clonar el Repositorio
+
+```bash
+git clone https://github.com/shadowfer/VetSystem.git
+cd VetSystem
+```
+
+### 2. Instalar Dependencias Backend
+
+```bash
+composer install
+```
+
+### 3. Instalar Dependencias Frontend
+
+```bash
+npm install
+```
+
+### 4. Configuración de Entorno
+
+Duplica el archivo de ejemplo y renómbralo:
+
+```bash
+cp .env.example .env
+```
+
+Abre el archivo `.env` y configura tu base de datos:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=vetsystem
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Generar Key de Aplicación
+
+```bash
+php artisan key:generate
+```
+
+### 6. Migraciones y Seeders
+
+Ejecuta las migraciones para crear la estructura de la base de datos y poblarla con datos de prueba:
+
+```bash
+php artisan migrate --seed
+```
+
+### 7. Ejecutar la Aplicación
+
+Necesitarás dos terminales abiertas:
+
+**Terminal 1 (Servidor Laravel):**
+
+```bash
+php artisan serve
+```
+
+**Terminal 2 (Compilación de Assets en tiempo real):**
+
+```bash
+npm run dev
+```
+
+Accede a la aplicación en: `http://127.0.0.1:8000`
+
+---
+
+## 🧪 Usuarios de Prueba (Seeders)
+
+El sistema viene precargado con los siguientes usuarios para facilitar las pruebas:
+
+| Rol               | Email             | Contraseña |
+| :---------------- | :---------------- | :--------- |
+| **Administrador** | `admin@test.com`  | `password` |
+| **Staff**         | `staff@test.com`  | `password` |
+| **Cliente**       | `client@test.com` | `password` |
+
+---
+
+## 📂 Estructura de Carpetas Clave
+
+-   `app/Http/Controllers`: Lógica de negocio (UserController, PetController, etc.).
+-   `app/Models`: Modelos Eloquent (User, Pet).
+-   `database/migrations`: Definiciones de esquema de base de datos.
+-   `resources/views`: Plantillas Blade para el frontend.
+-   `routes/web.php`: Definición de rutas web y grupos de middleware.
+
+---
+
+## 🤝 Contribución
+
+Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir lo que te gustaría cambiar.
+
+## 📄 Licencia
+
+Este proyecto es de código abierto y está bajo la licencia [MIT](https://opensource.org/licenses/MIT).
